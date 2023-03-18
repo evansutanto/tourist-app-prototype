@@ -1,0 +1,160 @@
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="design.css" rel="stylesheet">
+    <title>Trip Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <script src="timeme.js"></script>
+        <script type="text/javascript">
+            TimeMe.initialize({
+                currentPageName: "details-page", // page name
+                idleTimeoutInSeconds: 15 // time before user considered idle
+            });
+        </script>
+        <a href="index.html">
+            <div id="home-button"></div>
+        </a>
+    </header>
+    <div class="root">
+        <div class="slider-wrapper">
+            <div class="slider">
+                <img id="slide-1" src="img/nusaPenida1.jpeg" alt="nusa penida 1" />
+                <img id="slide-2" src="img/nusaPenida3.jpg" alt="nusa penida 2" />
+                <img id="slide-3" src="img/nusaPenida2.jpg" alt="nusa penida 3" />
+            </div>
+            <div class="slider-nav">
+                <a href="#slide-1"></a>
+                <a href="#slide-2"></a>
+                <a href="#slide-3"></a>
+            </div>
+        </div>
+        <div class="text-wrapper">
+            <div class="detail-desc">
+                <div class="desc">
+                    <h1>Nusa Penida</h1>
+                    <div class="circle">
+                        <i class="fa fa-heart fa-xl" aria-hidden="true" style="color:orangered"></i>
+                    </div>
+                </div>
+                <div class="desc2">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <p>Bali, Indonesia</p>
+                </div>
+            </div>
+            <div class="detail-info">
+                <div class="resto">
+                    <p class="small-desc">Rating</p>
+                    <div class="circle">
+                        <i class="fa fa-star" style="color:orangered;"></i>
+                    </div>
+                    <p><span class="bold">4.8 (3.2k)</span></p>
+                </div>
+                <div class="resto">
+                    <p class="small-desc">Distance</p>
+                    <div class="circle">
+                        <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                    </div>
+                    <p><span class="bold">3000km</span></p>
+                </div>
+                <div class="resto">
+                    <p class="small-desc">Restaurants</p>
+                    <div class="circle">
+                        <i class="fa fa-cutlery" aria-hidden="true"></i>
+                    </div>
+                    <p><span class="bold">108 avail.</span></p>
+                </div>
+            </div>
+            <div class="booking-opt">
+                <h2>Pricing</h2>
+                <div class="buttons">
+                    <img src="img/plane.svg">
+                    <div class="subtext">
+                        <h2>Flights</h2>
+                        <p id="currFlight">Not chosen</p>
+                    </div>
+                    <button id="resetFlt" onclick="resetFlight()"> <img src="img/trashLogo.png" alt="trash can"></button>
+                    <button onclick="location.href='results.html';" id="book-flight">Book Flights</button>
+                </div>
+                <div class="buttons">
+                    <img src="img/hotel.svg">
+                    <div class="subtext">
+                        <h2>Hotels</h2>
+                        <p id="currHotel">Not Chosen</p>
+                    </div>
+                    <button id="resetHtl" onclick="resetHtl()"><img src="img/trashLogo.png" alt="trash can"></button>
+                    <button onclick="location.href='hotel-results.html';" id="book-hotel">Book Hotels</button>
+                </div>
+            </div>
+            <div><a><button id="confirm" class="confirm-btn" onclick="bookTrip()">Book a trip</button></a></div>
+        </div>
+        <script type="text/javascript">
+            function getUrlVars() {
+                var vars = {};
+                var url = decodeURIComponent(window.location.href.replace(/\+/g, '%20'));
+                var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                    function (m, key, value) {
+                        vars[key] = value;
+                    });
+                return vars;
+            }
+
+            if (getUrlVars()["option"] != undefined) {
+                var text = getUrlVars()["option"];
+                localStorage.setItem("flight", text)
+                document.querySelector('#confirm').style.background = '#FF5733';
+            }
+            if (getUrlVars()["hotel"] != undefined) {
+                var curr_hotel = getUrlVars()["hotel"];
+                localStorage.setItem("hotel", curr_hotel)
+                document.querySelector('#confirm').style.background = '#FF5733';
+            }
+            document.getElementById("currFlight").innerHTML = localStorage.getItem("flight") ? localStorage.getItem("flight") : "Not Chosen";
+            document.getElementById("currHotel").innerHTML = localStorage.getItem("hotel") ? localStorage.getItem("hotel") : "Not Chosen";
+            function resetFlight() {
+                if (localStorage.getItem("flight") != "Not Chosen") {
+                    localStorage.setItem("flight", "Not Chosen");
+                }
+                window.history.replaceState(null, null, '?option=Not Chosen');
+                document.getElementById("currFlight").innerHTML = "Not Chosen";
+            }
+            function resetHtl() {
+                if (localStorage.getItem("hotel") != "Not Chosen") {
+                    localStorage.setItem("hotel", "Not Chosen");
+                }
+                window.history.replaceState(null, null, '?hotel=Not Chosen');
+                document.getElementById("currHotel").innerHTML = "Not Chosen";
+            }
+            function bookTrip() {
+                var curr_hotel = localStorage.getItem("hotel");
+                var curr_flight = localStorage.getItem("flight");
+                console.log(curr_flight);
+                console.log(curr_hotel);
+                if ((curr_flight == "Not Chosen" || curr_flight == undefined) && (curr_hotel == "Not Chosen" || curr_hotel == undefined)) {
+                    alert("[ERROR]: choose a booking first");
+                }
+                else {
+                    if (localStorage.getItem("time_details")) {
+                        let tempTime = localStorage.getItem("time_details");
+                        localStorage.setItem("time_details", parseFloat(tempTime) + parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+                    } else {
+                        localStorage.setItem("time_details", parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+                    }
+                    window.location.href = "confirmation.html";
+                }
+            }
+        </script>
+
+    </div>
+</body>
+
+</html>

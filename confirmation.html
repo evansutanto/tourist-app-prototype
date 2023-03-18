@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation</title>
+    <link rel="stylesheet" href="design.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css" />
+    <script src="https://kit.fontawesome.com/a5817a945e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <script src="timeme.js"></script>
+        <script type="text/javascript">
+            TimeMe.initialize({
+                currentPageName: "payment-page", // page name
+                idleTimeoutInSeconds: 15 // time before user considered idle
+            });
+        </script>
+        <div onclick="confirmationPrompt()" id="home-button"></div>
+    </header>
+    <div class="root">
+        <div class="topBar">
+            <h1>Travel Plan</h1>
+
+        </div>
+        <div class="text-wrapper">
+            <div class="recap flightDetail">
+                <div class="content">
+                    <h2 class="fstart">Flight</h2>
+                    <div class="places">
+                        <div class="place-recap">
+                            <div class="circle"><span class="fi fi-nl"></span></span></div>
+                            <h2>AMS</h2>
+                            <p>14 July 2022</p>
+                            <p>6:00 AM</p>
+                            <span class="bold"><i class="fa fa-ticket" aria-hidden="true"></i>
+                                First Class</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right fa-xl"></i>
+                        <div class="place-recap">
+                            <div class="circle"><span class="fi fi-id"></span></span></div>
+                            <h2>DPS</h2>
+                            <p>15 July 2022</p>
+                            <p>09:00 AM</p>
+                            <span class="bold"><i class="fa fa-ticket" aria-hidden="true"></i>
+                                First Class</span>
+                        </div>
+                    </div>
+                    <button id="flightButton">More Detail</button>
+                    <div id="flightModal" class="modal">
+                        <div class="modal-content">
+                            <span class="closeFlight">&times;</span>
+                            <h2>Amsterdam (AMS) > Denpasar (DPS)</h2>
+                            <p>Thursday, 14 July 2022</p>
+                            <p>Booking Code: AF0009</p>
+                            <p>Seat Number: A13</p>
+                            <p>Total Flight Duration: 27 hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recap hotelDetail">
+                <div class="content">
+                    <h2 class="fstart">Hotel</h2>
+                    <div class="hotel-overlay">
+                        <p>Asteria Hotel</p>
+                        <p>15 July 2022 - 19 July 2022</p>
+                        <p><i class="fa fa-star" aria-hidden="true" style="color:orange"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:orange"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:orange"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:orange"></i>
+
+                        </p>
+                    </div>
+                    <button id="hotelButton">More Detail</button>
+                    <div id="hotelModal" class="modal">
+                        <div class="modal-content">
+                            <span class="closeHotel">&times;</span>
+                            <h2>Booking Confirmation</h2>
+                            <p>Booking Code: 0A435JKA</p>
+                            <p>Booking Date: 15 July 2022</p>
+                            <p>Booked by: Jake</p>
+                            <p>Room Type: Single</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="total">
+                <h2 class="fstart">Total</h2>
+                <p class="list hotelDetail">
+                    <i class='item'>Hotel (4 nights)</i>
+                    <i class="price">$886</i>
+                </p>
+                <p class="list flightDetail">
+                    <i class='item'>Flights (Return) </i>
+                    <i class="price">$726</i>
+                </p>
+                <br>
+                <p class="list">
+                    <i class='item'>Total</i>
+                    <i class="price" id="totalPrice">$1612</i>
+                </p>
+            </div>
+        </div>
+        <div><button id="paymentBtn" class="confirm-btn" onclick="payBtn()">Proceed to Payment</button></div>
+    </div>
+
+    <script defer>
+        console.log("hello");
+        var hotelPrice = 886;
+        var flightPrice = 726;
+        var totalPrice = hotelPrice + flightPrice;
+        function initPage() {
+            var chosen_hotel = localStorage.getItem("hotel");
+            var chosen_filght = localStorage.getItem("flight");
+            console.log(chosen_filght);
+            console.log(chosen_hotel);
+            if (chosen_filght == undefined || chosen_filght == "Not Chosen") {
+                console.log("chosen flight is: ", chosen_filght);
+                document.getElementsByClassName('flightDetail')[0].style.display = "none";
+                document.getElementsByClassName('flightDetail')[1].style.display = "none";
+                totalPrice -= flightPrice;
+            }
+            if (chosen_hotel == undefined || chosen_hotel == "Not Chosen") {
+                console.log("chosen hotel is: ", chosen_hotel);
+                document.getElementsByClassName('hotelDetail')[0].style.display = "none";
+                document.getElementsByClassName('hotelDetail')[1].style.display = "none";
+                totalPrice -= hotelPrice;
+            }
+            document.getElementById("totalPrice").innerHTML = '$' + totalPrice;
+
+        }
+        function payBtn() {
+            if (localStorage.getItem("time_confirm")) {
+                let tempTime = localStorage.getItem("time_confirm");
+                localStorage.setItem("time_confirm", parseFloat(tempTime) + parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+            } else {
+                localStorage.setItem("time_confirm", parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+            }
+            alert("Thank you for Participating")
+        }
+        initPage();
+
+        function confirmationPrompt() {
+            let text = "Are you sure you wanna go back Home?\nAll your previous data will be lost.";
+            if (confirm(text) == true) {
+                if (localStorage.getItem("time_confirm")) {
+                    let tempTime = localStorage.getItem("time_confirm");
+                    localStorage.setItem("time_confirm", parseFloat(tempTime) + parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+                } else {
+                    localStorage.setItem("time_confirm", parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+                }
+                window.location.href = 'index.html';
+                text = "You pressed OK!";
+            } else {
+                text = "You canceled!";
+            }
+        }
+
+        var flightModal = document.getElementById("flightModal");
+        var flightButton = document.getElementById("flightButton");
+        var flightSpan = document.getElementsByClassName("closeFlight")[0];
+        flightButton.onclick = function () {
+            flightModal.style.display = "block";
+        }
+        flightSpan.onclick = function () {
+            flightModal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == flightModal) {
+                flightModal.style.display = "none";
+            }
+        }
+
+        var hotelModal = document.getElementById("hotelModal");
+        var hotelButton = document.getElementById("hotelButton");
+        var hotelSpan = document.getElementsByClassName("closeHotel")[0];
+        hotelButton.onclick = function () {
+            hotelModal.style.display = "block";
+        }
+        hotelSpan.onclick = function () {
+            hotelModal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == hotelModal) {
+                hotelModal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

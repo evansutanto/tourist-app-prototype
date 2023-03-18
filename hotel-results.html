@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="design.css" rel="stylesheet">
+    <title>Hotel Results</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="results.js" defer></script>
+    <script src="submitForm.js"></script>
+</head>
+
+<body>
+    <header>
+        <script src="timeme.js"></script>
+        <script type="text/javascript">
+            function storeData() {
+                if (localStorage.getItem("time_hotel")) {
+                    let tempTime = localStorage.getItem("time_hotel");
+                    localStorage.setItem("time_hotel", parseFloat(tempTime) + parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+                } else {
+                    localStorage.setItem("time_hotel", parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+                }
+            }
+            TimeMe.initialize({
+                currentPageName: "hotel-page", // page name
+                idleTimeoutInSeconds: 15 // time before user considered idle
+            });
+
+        </script>
+        <a href="index.html">
+            <div id="home-button"></div>
+        </a>
+    </header>
+    <div class="root">
+        <div class="topBar">
+            <h1>Hotel Result</h1>
+            <div class="date">
+                <label for="start" class="date">Check in<input type="date" id="start" name="trip-start"
+                        value="2023-07-22" min="2023-01-01"></label>
+                <label for="start" class="date">Check Out<input type="date" id="start" name="trip-start"
+                        value="2023-11-22" min="2023-01-01"></label>
+            </div>
+        </div>
+        <div class="results">
+            <form method="get" action="details.html">
+                <table>
+                    <tr id="row1">
+                        <td>
+                            <div class="hotel">
+                                <img src="https://23c133e0c1637be1e07d-be55c16c6d91e6ac40d594f7e280b390.ssl.cf1.rackcdn.com/u/gpch/Park-Hotel-Group---Explore---Grand-Park-City-Hall-Facade.jpg"
+                                    alt="" class="big">
+                                <div class="hotel-desc">
+                                    <div class="hotel-name">
+                                        <h2>Asteria Hotel</h2>
+                                        <span class="bold">$165.3/night</span>
+
+                                    </div>
+                                    <p>Nusa Penida, Bali</p>
+                                    <p>15 July 2022</p>
+                                </div>
+
+                                <label class="choose"><input type="radio" name="hotel" value="Asteria Hotel"><span
+                                        class="radio-span">Choose</span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="row2">
+                        <td>
+                            <div class="hotel">
+                                <img src="https://23c133e0c1637be1e07d-be55c16c6d91e6ac40d594f7e280b390.ssl.cf1.rackcdn.com/u/gpch/Park-Hotel-Group---Explore---Grand-Park-City-Hall-Facade.jpg"
+                                    alt="" class="big">
+                                <div class="hotel-desc">
+                                    <div class="hotel-name">
+                                        <h2>Ibis Hotel</h2>
+                                        <p><span class="bold">$165.3</span>/night</p>
+                                    </div>
+                                    <p>Nusa Penida, Bali</p>
+                                    <p>15 July 2022</p>
+                                </div>
+
+                                <label class="choose"><input type="radio" name="hotel" value="Ibis Hotel"><span
+                                        class="radio-span">Choose</span></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="row3">
+                        <td>
+                            <div class="hotel">
+                                <img src="https://23c133e0c1637be1e07d-be55c16c6d91e6ac40d594f7e280b390.ssl.cf1.rackcdn.com/u/gpch/Park-Hotel-Group---Explore---Grand-Park-City-Hall-Facade.jpg"
+                                    alt="" class="big">
+                                <div class="hotel-desc">
+                                    <div class="hotel-name">
+                                        <h2>Aston Hotel</h2>
+                                        <span class="bold">$165.3/night</span>
+
+                                    </div>
+                                    <p>Nusa Penida, Bali</p>
+                                    <p>15 July 2022</p>
+                                </div>
+
+                                <label class="choose"><input type="radio" name="hotel" value="Aston Hotel"><span
+                                        class="radio-span">Choose</span></label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" class="confirm" id="submit-btn" />
+            </form>
+            <br>
+
+        </div>
+    </div>
+</body>
+
+</html>

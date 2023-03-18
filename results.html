@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="design.css" rel="stylesheet">
+    <title>Flight Results</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="results.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <script src="timeme.js"></script>
+        <script type="text/javascript">
+            function storeData() {
+                if (localStorage.getItem("time_flight")) {
+                    let tempTime = localStorage.getItem("time_flight");
+                    localStorage.setItem("time_flight", parseFloat(tempTime) + parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+                } else {
+                    localStorage.setItem("time_flight", parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
+                }
+            }
+            TimeMe.initialize({
+                currentPageName: "flight-page", // page name
+                idleTimeoutInSeconds: 15 // time before user considered idle
+            });
+
+        </script>
+        <a href="index.html">
+            <div id="home-button"></div>
+        </a>
+    </header>
+    <div class="root">
+        <div class="topBar">
+            <h1>Flight Result</h1>
+            <div class="date">
+                <label for="start" class="date">Departure<input type="date" id="start" name="trip-start"
+                        value="2023-07-22" min="2023-01-01"></label>
+
+                <button id="show-date-input-btn">Add a Return Date</button>
+                <div id="date-input-wrapper" style="display: none;">
+                    <label for="return" class="date">Return Date<input type="date" id="return"></label>
+                    <button id="hide-date-input-btn">X</button>
+                </div>
+            </div>
+        </div>
+        <div class="results">
+            <form method="get" action="details.html">
+                <table>
+                    <tr id="row1">
+                        <td>
+                            <div class="flight-name">
+                                <div class="flight">
+                                    <img src="https://logodix.com/logo/831675.jpg" alt="delta" class="small">
+                                    <h2>Indigo 6E 6717</h2>
+                                </div>
+                                <div class="flight">
+                                    <p>01 hr 40 min</p>
+                                </div>
+                            </div>
+                            <div class="from-to">
+                                <div class="from">
+                                    <h2>5.50</h2>
+                                    <p>AMS</p>
+                                    <p>(Amsterdam)</p>
+                                </div>
+                                <h2>----></h2>
+                                <div class="to">
+                                    <h2>7.30</h2>
+                                    <p>DPS</p>
+                                    <p>(Bali/Denpasar)</p>
+                                </div>
+                            </div>
+                            <div class="flight-desc">
+                                <p>Business Class</p>
+                                <p>From <span class="bold">$230</span></p>
+                            </div>
+                            <label class="choose"><input type="radio" name="option" value="Indigo 6E 6717"><span
+                                    class="radio-span">Choose</span></label>
+                        </td>
+                    </tr>
+                    <tr id="row2">
+                        <td>
+                            <div class="flight-name">
+                                <div class="flight">
+                                    <img src="https://logodix.com/logo/831675.jpg" alt="delta" class="small">
+                                    <h2>Delta 6E 6717</h2>
+                                </div>
+                                <div class="flight">
+                                    <p>01 hr 40 min</p>
+                                </div>
+                            </div>
+                            <div class="from-to">
+                                <div class="from">
+                                    <h2>2.20</h2>
+                                    <p>AMS</p>
+                                    <p>(Amsterdam)</p>
+                                </div>
+                                <h2>----></h2>
+                                <div class="to">
+                                    <h2>3.30</h2>
+                                    <p>DPS</p>
+                                    <p>(Bali/Denpasar)</p>
+                                </div>
+                            </div>
+                            <div class="flight-desc">
+                                <p>Business Class</p>
+                                <p>From <span>$550</span></p>
+                            </div>
+                            <label class="choose"> <input type="radio" name="option" value="Delta 6E 6717"> <span
+                                    class="radio-span">Choose</span></label>
+                        </td>
+                    </tr>
+                    <tr id="row3">
+                        <td>
+                            <div class="flight-name">
+                                <div class="flight">
+                                    <img src="https://logodix.com/logo/831675.jpg" alt="delta" class="small">
+                                    <h2>UAL 6E 6717</h2>
+                                </div>
+                                <div class="flight">
+                                    <p>01 hr 40 min</p>
+                                </div>
+                            </div>
+                            <div class="from-to">
+                                <div class="from">
+                                    <h2>4.30</h2>
+                                    <p>AMS</p>
+                                    <p>(Amsterdam)</p>
+                                </div>
+                                <h2>----></h2>
+                                <div class="to">
+                                    <h2>6.30</h2>
+                                    <p>DPS</p>
+                                    <p>(Bali/Denpasar)</p>
+                                </div>
+                            </div>
+                            <div class="flight-desc">
+                                <p>Business Class</p>
+                                <p>From <span>$360</span></p>
+                            </div>
+                            <label class="choose"><input type="radio" name="option" value="UAL 6E 6717"><span
+                                    class="radio-span">Choose</span></label>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" class="confirm" id="submit-btn" onclick="storeData()" />
+            </form>
+            <br>
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>
