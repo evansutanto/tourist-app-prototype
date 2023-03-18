@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank you!</title>
+</head>
+
+<body style="text-align: center;">
+    <h1>Thank you for Participating!</h1>
+    <h2>Please screenshot or fill out the survey using the time</h2>
+    <h3 id="home"></h3>
+    <h3 id="detail"></h3>
+    <h3 id="flight"></h3>
+    <h3 id="hotel"></h3>
+    <h3 id="confirm"></h3>
+    <button id="restart" onclick="restart()">Restart</button>
+    <script defer>
+        document.getElementById("home").innerHTML = "Time 1: " + localStorage.getItem("time_home");
+        document.getElementById("detail").innerHTML = "Time 2: " + localStorage.getItem("time_details");
+        document.getElementById("flight").innerHTML = "Time 3: " + localStorage.getItem("time_flight");
+        document.getElementById("hotel").innerHTML = "Time 4: " + localStorage.getItem("time_hotel");
+        document.getElementById("confirm").innerHTML = "Time 5: " + localStorage.getItem("time_confirm");
+
+        function restart() {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+
+</html>

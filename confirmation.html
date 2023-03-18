@@ -141,13 +141,15 @@
             } else {
                 localStorage.setItem("time_confirm", parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
             }
-            alert("Thank you for Participating")
+            window.location.href = "thank.html";
         }
         initPage();
 
         function confirmationPrompt() {
             let text = "Are you sure you wanna go back Home?\nAll your previous data will be lost.";
             if (confirm(text) == true) {
+                window.localStorage.removeItem("flight");
+                window.localStorage.removeItem("hotel");
                 if (localStorage.getItem("time_confirm")) {
                     let tempTime = localStorage.getItem("time_confirm");
                     localStorage.setItem("time_confirm", parseFloat(tempTime) + parseFloat(TimeMe.getTimeOnCurrentPageInSeconds()));
