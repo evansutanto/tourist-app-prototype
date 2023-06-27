@@ -1,7 +1,6 @@
-
 # Contents
+Q1 [#Q1]
 # Repository 1 — WrongSecrets
-—-
 > Q1) Describe, with your own words, what the project is about. Also, include in such a description the history of the project in terms of age, number of commits in the main branch, and number of collaborators.
 *TODO: Answer Q1*
 
@@ -27,7 +26,6 @@
 *TODO: Answer Q8*
 === 
 # Repository 2 — Edison-Microservice
-—-
 ## TODO: Answer Q1
 > Describe, with your own words, what the project is about. Also, include in such a description the history of the project in terms of age, number of commits in the main branch, and number of collaborators.
 
