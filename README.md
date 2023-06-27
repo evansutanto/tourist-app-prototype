@@ -1,7 +1,7 @@
 # Group 67
 
 ## Table of Contents
-[Q1](#todo:-answer-q2-1)
+[#todo:-answer-q2-1](#todo-answer-q1)
 ## Repository 1 — WrongSecrets
 ### TODO: Answer Q1
 > Describe, with your own words, what the project is about. Also, include in such a description the history of the project in terms of age, number of commits in the main branch, and number of collaborators.
